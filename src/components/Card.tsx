@@ -1,14 +1,13 @@
-"use client";
-
-import Image from "next/image";
-import Rating from "@mui/material/Rating";
+import Image from 'next/image'
+import Rating from '@mui/material/Rating'
+import InteractiveCard from './InteractiveCard'
 
 type CardProps = {
-  venueName: string;
-  imgSrc: string;
-  rating: number;
-  onRatingChange: (venueName: string, rating: number) => void;
-};
+  venueName: string
+  imgSrc: string
+  rating: number
+  onRatingChange: (venueName: string, rating: number) => void
+}
 
 export default function Card({
   venueName,
@@ -17,8 +16,8 @@ export default function Card({
   onRatingChange,
 }: CardProps) {
   return (
-    <div className="w-[250px] h-[300px] bg-white rounded-lg shadow-lg m-4">
-      <div className="w-full h-[70%] relative rounded-t-lg overflow-hidden">
+    <InteractiveCard contentName={venueName}>
+      <div className="w-full h-[70%] relative">
         <Image
           src={imgSrc}
           alt="Venue Picture"
@@ -28,7 +27,9 @@ export default function Card({
       </div>
 
       <div className="w-full h-[30%] p-[10px]">
-        <div className="text-[16px] font-semibold text-gray-800 mb-2">{venueName}</div>
+        <div className="text-[16px] font-semibold text-gray-800 mb-2">
+          {venueName}
+        </div>
 
         <Rating
           id={`${venueName} Rating`}
@@ -36,10 +37,10 @@ export default function Card({
           data-testid={`${venueName} Rating`}
           value={rating}
           onChange={(_, newValue) => {
-            onRatingChange(venueName, newValue ?? 0);
+            onRatingChange(venueName, newValue ?? 0)
           }}
         />
       </div>
-    </div>
-  );
+    </InteractiveCard>
+  )
 }
